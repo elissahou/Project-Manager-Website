@@ -1,0 +1,13 @@
+﻿E9U.Tangello.Private - Project names manager.
+
+Features:
+- Asking for a new project name. (Get any, vs Choose your own?)
+- Creating lists of project names, sorted by category.
+- Associating name categories with project types.
+- For used projects, add a description.
+
+- Adding a new project name.
+- Viewing project names.
+- Managing project names (CRUD on names, CRUD on categories, CRUD on project types).
+- Check if a project name has been used.
+- Search option (on names and descriptions)
