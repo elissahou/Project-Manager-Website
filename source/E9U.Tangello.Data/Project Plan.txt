@@ -1,0 +1,1 @@
+﻿E9U.Tangello.Data - The Entity Framework Core DBContext and Entity Classes
