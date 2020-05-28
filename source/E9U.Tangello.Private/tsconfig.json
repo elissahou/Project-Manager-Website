@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+      "noImplicitAny": false,
+      "noEmitOnError": true,
+      "removeComments": false,
+      "sourceMap": true,
+      "target": "ES5",
+      "module": "commonjs"
+    },
+    "include": [
+      "source/ts/**/*"
+    ],
+    "exclude": [
+      "**/bin",
+      "**/node_modules",
+      "wwwroot"
+    ]
+  }
+  

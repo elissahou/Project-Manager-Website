@@ -1,0 +1,16 @@
+{
+  "name": "e9u.tangello.private",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Elissa Hou",
+  "license": "ISC",
+  "devDependencies": {
+    "source-map-loader": "^1.0.0",
+    "ts-loader": "^7.0.5",
+    "typescript": "^3.9.3"
+  }
+}
