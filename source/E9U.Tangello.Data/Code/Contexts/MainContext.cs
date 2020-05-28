@@ -20,5 +20,13 @@ namespace E9U.Tangello.Data
             : base(dbContextOptions)
         {
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Atoms
+            modelBuilder.Entity<Category>().HasAlternateKey(c => c.Name);
+            modelBuilder.Entity<ProjectName>().HasAlternateKey(p => p.Name);
+            modelBuilder.Entity<ProjectType>().HasAlternateKey(p => p.Name);
+        }
     }
 }

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E9U.Tangello.Data.Migrations.Migrations
 {
     [DbContext(typeof(MainContext))]
-    [Migration("20200528014620_Initial")]
+    [Migration("20200528172218_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,9 +27,12 @@ namespace E9U.Tangello.Data.Migrations.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
                     b.HasKey("ID");
+
+                    b.HasAlternateKey("Name");
 
                     b.ToTable("Categories");
                 });
@@ -59,9 +62,12 @@ namespace E9U.Tangello.Data.Migrations.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
                     b.HasKey("ID");
+
+                    b.HasAlternateKey("Name");
 
                     b.ToTable("ProjectNames");
                 });
@@ -91,9 +97,12 @@ namespace E9U.Tangello.Data.Migrations.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
                     b.HasKey("ID");
+
+                    b.HasAlternateKey("Name");
 
                     b.ToTable("ProjectTypes");
                 });

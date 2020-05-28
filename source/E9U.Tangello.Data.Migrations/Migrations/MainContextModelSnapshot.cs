@@ -25,9 +25,12 @@ namespace E9U.Tangello.Data.Migrations.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
                     b.HasKey("ID");
+
+                    b.HasAlternateKey("Name");
 
                     b.ToTable("Categories");
                 });
@@ -57,9 +60,12 @@ namespace E9U.Tangello.Data.Migrations.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
                     b.HasKey("ID");
+
+                    b.HasAlternateKey("Name");
 
                     b.ToTable("ProjectNames");
                 });
@@ -89,9 +95,12 @@ namespace E9U.Tangello.Data.Migrations.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
                     b.HasKey("ID");
+
+                    b.HasAlternateKey("Name");
 
                     b.ToTable("ProjectTypes");
                 });

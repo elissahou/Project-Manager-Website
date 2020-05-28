@@ -14,11 +14,12 @@ namespace E9U.Tangello.Data.Migrations.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Categories", x => x.ID);
+                    table.UniqueConstraint("AK_Categories_Name", x => x.Name);
                 });
 
             migrationBuilder.CreateTable(
@@ -43,11 +44,12 @@ namespace E9U.Tangello.Data.Migrations.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ProjectNames", x => x.ID);
+                    table.UniqueConstraint("AK_ProjectNames_Name", x => x.Name);
                 });
 
             migrationBuilder.CreateTable(
@@ -72,11 +74,12 @@ namespace E9U.Tangello.Data.Migrations.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ProjectTypes", x => x.ID);
+                    table.UniqueConstraint("AK_ProjectTypes_Name", x => x.Name);
                 });
         }
 
