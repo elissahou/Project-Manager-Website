@@ -14,5 +14,11 @@ namespace E9U.Tangello.Data
         public DbSet<ProjectName> ProjectNames { get; set; }
         public DbSet<ProjectNameToCategoryMapping> ProjectNameToCategoryMappings { get; set; }
         public DbSet<ProjectType> ProjectTypes { get; set; }
+
+
+        public MainContext(DbContextOptions<MainContext> dbContextOptions)
+            : base(dbContextOptions)
+        {
+        }
     }
 }

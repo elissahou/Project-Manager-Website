@@ -1,0 +1,1 @@
+﻿E9U.Tangello.Data.Migrations - Migrations dummy console app for Tangello project.
