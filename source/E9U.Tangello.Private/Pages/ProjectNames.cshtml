@@ -1,0 +1,34 @@
+﻿@page
+@model E9U.Tangello.Private.Pages.ProjectNamesModel
+@{
+    Layout = "_BootstrapLayout";
+}
+
+
+<div class="container">
+    <h1 style="text-align:center">@(this.Model.CategoryName) Project Names:</h1>
+    <div class="row">
+        <div class="col-sm-6 col-lg-4">
+            <ul class="list-group">
+                @foreach (var projectName in this.Model.ProjectNames)
+                {
+                    <li class="list-group-item">@projectName</li>
+                }
+            </ul>
+        </div>
+        <div class="col-sm-6">
+            <strong>Add a project name:</strong>
+            <form method="post">
+                @Html.AntiForgeryToken()
+                <div class="input-group">
+                    <input name="newProjectName" type="text" class="form-control" placeholder="Enter new project name here.">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit">
+                            <text>Add Project Name</text>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
