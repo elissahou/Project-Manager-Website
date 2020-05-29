@@ -7,7 +7,7 @@ using E9U.Tangello.Data.Entities;
 
 namespace E9U.Tangello.Data
 {
-    public class MainContext : DbContext
+    public class MainDbContext : DbContext
     {
         public DbSet<Category> Categories { get; set; }
         public DbSet<CategoryToProjectTypeMapping> CategoryToProjectTypeMappings { get; set; }
@@ -16,7 +16,7 @@ namespace E9U.Tangello.Data
         public DbSet<ProjectType> ProjectTypes { get; set; }
 
 
-        public MainContext(DbContextOptions<MainContext> dbContextOptions)
+        public MainDbContext(DbContextOptions<MainDbContext> dbContextOptions)
             : base(dbContextOptions)
         {
         }

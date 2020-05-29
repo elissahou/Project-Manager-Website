@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace E9U.Tangello.Data.Migrations.Migrations
 {
-    [DbContext(typeof(MainContext))]
+    [DbContext(typeof(MainDbContext))]
     partial class MainContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

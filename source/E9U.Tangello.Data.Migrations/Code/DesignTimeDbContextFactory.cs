@@ -8,25 +8,17 @@ using Microsoft.EntityFrameworkCore.Design;
 
 namespace E9U.Tangello.Data.Migrations
 {
-    public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<MainContext>
+    public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<MainDbContext>
     {
-        public MainContext CreateDbContext(string[] args)
+        public MainDbContext CreateDbContext(string[] args)
         {
             var serviceCollection = new ServiceCollection()
-                .AddDbContext<MainContext>(dbContextOptionsBuilder =>
-                {
-                    var connectionString = "Server=(localdb)\\MSSQLLocalDB;Database=E9U.Tangello;Trusted_Connection=True;";
-                    dbContextOptionsBuilder.UseSqlServer(connectionString, sqlServerDbContextOptionsBuilder =>
-                    {
-                        sqlServerDbContextOptionsBuilder.MigrationsAssembly("E9U.Tangello.Data.Migrations");
-                    });
-                })
-                ;
+                .AddMainContext();
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
 
-            var dbContext = serviceProvider.GetRequiredService<MainContext>();
-            return dbContext;
+            var mainDbContext = serviceProvider.GetRequiredService<MainDbContext>();
+            return mainDbContext;
         }
     }
 }

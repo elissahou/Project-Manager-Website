@@ -10,11 +10,17 @@
     <Compile Remove="Migrations\20200528164653_Initial.cs" />
     <Compile Remove="Migrations\20200528170909_Initial.cs" />
     <Compile Remove="Migrations\20200528172046_Initial.cs" />
+    <Compile Remove="Migrations\20200528172218_Initial.cs" />
+    <Compile Remove="Migrations\20200528173545_MinLength.cs" />
+    <Compile Remove="Migrations\20200528173624_MinLength.cs" />
+    <Compile Remove="Migrations\20200528173801_Initial.cs" />
+    <Compile Remove="Migrations\20200528173939_Initial.cs" />
+    <Compile Remove="Migrations\20200528174136_Initial.cs" />
+    <Compile Remove="Migrations\20200528174316_Initial.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.6" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.6">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
