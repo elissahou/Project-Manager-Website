@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.705
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "E9U.Tangello.Data.Scripts", "E9U.Tangello.Data.Scripts\E9U.Tangello.Data.Scripts.csproj", "{666F633E-B2CC-4580-99C1-ED3906ACCD41}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "E9U.Tangello.Data", "E9U.Tangello.Data\E9U.Tangello.Data.csproj", "{0331D5A4-5B50-464E-99C8-DDCA054BB886}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{666F633E-B2CC-4580-99C1-ED3906ACCD41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{666F633E-B2CC-4580-99C1-ED3906ACCD41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{666F633E-B2CC-4580-99C1-ED3906ACCD41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{666F633E-B2CC-4580-99C1-ED3906ACCD41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0331D5A4-5B50-464E-99C8-DDCA054BB886}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0331D5A4-5B50-464E-99C8-DDCA054BB886}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0331D5A4-5B50-464E-99C8-DDCA054BB886}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0331D5A4-5B50-464E-99C8-DDCA054BB886}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D3E69C38-C0C8-4FCE-A673-E2A426107C5B}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,10 @@
+﻿E9U.Tangello.Data.Scripts - Scripts for testing and maintaining of the E9U.Tangello database.
+
+Goals:
+- Add a category and a project name.
+- Add a category to project name mapping.
+- Re-map project name to a different category.
+
+- Add a project type.
+- Add a category to project type mapping.
+- Delete the mapping, and re-add the same mapping.
