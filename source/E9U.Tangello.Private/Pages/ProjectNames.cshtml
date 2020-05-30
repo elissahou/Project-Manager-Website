@@ -4,24 +4,45 @@
     Layout = "_BootstrapLayout";
 }
 
+@section HeadElement{
+    <link rel="stylesheet" href="~/css/Pages/ProjectNames.css">
+}
+
 
 <div class="container">
-    <h1 style="text-align:center">@(this.Model.CategoryName) Project Names:</h1>
+    <h2 style="text-align:center">
+        @(this.Model.CategoryName)
+        <small class="text-muted">Project Names</small>
+    </h2>
+    <br />
+
+    <div class="row">
+        <div class="col-sm-12" style="text-align:center">
+            <input type="text" id="myInput" placeholder="Search for project names...">
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-sm-6 col-lg-4">
-            <ul class="list-group">
-                @foreach (var projectName in this.Model.ProjectNames)
-                {
-                    <li class="list-group-item">@projectName</li>
-                }
-            </ul>
+            <div class="panel panel-default">
+                <div class="panel-heading">Available Project Names</div>
+                <div class="panel-body" id="test">
+                    <ul class="list-group" id="projectNamesUL">
+                        @foreach (var projectName in this.Model.ProjectNames)
+                        {
+                            <li class="list-group-item">@projectName</li>
+                        }
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="col-sm-6">
-            <strong>Add a project name:</strong>
+
+        <div class="col-sm-6 col-lg-8">
+            <h5 >Add a project name:</h5>
             <form method="post">
                 @Html.AntiForgeryToken()
                 <div class="input-group">
-                    <input name="newProjectName" type="text" class="form-control" placeholder="Enter new project name here.">
+                    <input id="inputProjectName" name="newProjectName" type="text" class="form-control" placeholder="Enter new project name here.">
                     <div class="input-group-btn">
                         <button class="btn btn-default" type="submit">
                             <text>Add Project Name</text>
@@ -32,3 +53,7 @@
         </div>
     </div>
 </div>
+
+@section BodyEndScripts {
+    <script src="~/ts-out/search.js"></script>
+}

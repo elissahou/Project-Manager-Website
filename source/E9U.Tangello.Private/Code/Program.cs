@@ -12,7 +12,7 @@ namespace E9U.Tangello.Private
 {
     public class Program
     {
-        public static void Main(string[] args)
+        static void Main(string[] args)
         {
             CreateWebHostBuilder(args).Build().Run();
         }

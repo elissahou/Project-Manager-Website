@@ -19,6 +19,7 @@ namespace E9U.Tangello.Data
                     {
                         sqlServerDbContextOptionsBuilder.MigrationsAssembly("E9U.Tangello.Data.Migrations");
                     });
+                //}, ServiceLifetime.Transient, ServiceLifetime.Transient)
                 })
                 ;
 

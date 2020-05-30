@@ -5,6 +5,7 @@ module.exports = {
     mode: "development",
     entry: {
         "index": "./source/ts/index.ts",
+        "search": "./source/ts/search.ts",
     },
     output: {
         path: path.resolve(__dirname, "wwwroot", "ts-out"),

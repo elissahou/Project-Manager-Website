@@ -11,41 +11,29 @@ namespace E9U.Tangello.Private.Pages
     {
         public string CategoryName { get; set; }
         public List<string> ProjectNames { get; set; } = new List<string>();
+        private IRepository Repository { get; }
 
 
-        //public ProjectNamesModel()
-        //{
-        //    this.ProjectNames = new List<string>()
-        //    {
-        //        "Tangerine",
-        //        "Lemon",
-        //        "Pamplemousse"
-        //    };
-
-        //    this.ProjectNames.Sort();
-        //}
-
-        public void OnGet([FromQuery] string categoryName)
+        public ProjectNamesModel(IRepository repository)
         {
-            this.ProjectNames = new List<string>()
-            {
-                "Tangerine",
-                "Lemon",
-                "Pamplemousse"
-            };
-
-            this.ProjectNames.Sort();
-
-            this.CategoryName = categoryName;
+            this.Repository = repository;
         }
 
-        public IActionResult OnPost([FromForm] string newProjectName, [FromQuery] string categoryName)
+        public async Task OnGetAsync([FromQuery] string categoryName)
         {
             this.CategoryName = categoryName;
 
-            Console.WriteLine(newProjectName);
+            var projectNames = await this.Repository.GetAllProjectNamesForCategoryAsync(categoryName);
 
-            return this.RedirectToPage();
+            this.ProjectNames = projectNames.ToList();
+            this.ProjectNames.Sort();
+        }
+
+        public async Task<IActionResult> OnPostAsync([FromForm] string newProjectName, [FromQuery] string categoryName)
+        {
+            await this.Repository.PostProjectNamesForCategoryAsync(categoryName, newProjectName);
+
+            return this.RedirectToPage(new { categoryName });
         }
     }
 }

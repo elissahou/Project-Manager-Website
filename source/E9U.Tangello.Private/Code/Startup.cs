@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
+using E9U.Tangello.Data;
+
+
 namespace E9U.Tangello.Private
 {
     public class Startup
@@ -15,6 +18,15 @@ namespace E9U.Tangello.Private
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services
+                .AddMainContext()
+                //.AddSingleton<IRepository, HardCodedRepository>()
+                //.AddSingleton<IRepository, FileBasedRepository>()
+                //.AddSingleton<IRepository, DatabaseRepository>() // Cannot consume scoped MainDbContext in singleton DatabaseRepository.
+                .AddScoped<IRepository, DatabaseRepository>()
+                //.AddTransient<IRepository, DatabaseRepository>()
+                ;
+
             services.AddMvc();
         }
 
