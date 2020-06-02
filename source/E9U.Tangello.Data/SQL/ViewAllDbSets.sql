@@ -4,3 +4,5 @@ select * from ProjectTypes;
 
 select * from CategoryToProjectTypeMappings;
 select * from ProjectNameToCategoryMappings;
+
+select * from InUseProjectNames;

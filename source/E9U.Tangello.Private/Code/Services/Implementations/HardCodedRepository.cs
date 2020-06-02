@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 
 namespace E9U.Tangello.Private
 {
-    public class HardCodedRepository : IRepository
+    //public class HardCodedRepository : IRepository // Removed implementaiton for now, so this file won't need to be updated as IRepository is updated.
+    public class HardCodedRepository
     {
         public Task<IEnumerable<string>> GetAllProjectNamesForCategoryAsync(string category)
         {

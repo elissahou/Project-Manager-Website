@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace E9U.Tangello.Data.Entities
 {
-    class InUseProjectName
+    public class InUseProjectName
     {
         public int ID { get; set; }
 

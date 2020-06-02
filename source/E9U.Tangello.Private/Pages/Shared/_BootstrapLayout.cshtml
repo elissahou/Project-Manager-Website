@@ -11,12 +11,46 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+    <link rel="stylesheet" href="~/css/site.css" />
+
     @RenderSection("HeadElement", required: false)
 
     <meta name="viewport" content="width=device-width" />
     <title>_BootstrapLayout</title>
 </head>
-<body>
+<body style="background-color:lightgrey">
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" style="color:white" href="~/index.html">ProjectNamesProjectManager</a>
+
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#myNavbarCollapseRight">
+                    <span class="sr-only">Account</span>
+                    <span style="color:white" class="glyphicon glyphicon-user"></span>
+                </button>
+
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#myNavbarCollapse">
+                    <span class="sr-only">Menu</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+            </div>
+
+                <ul class="nav navbar-nav collapse navbar-collapse" id="myNavbarCollapse">
+                    <li><a href="/ProjectNames">(Project Names) placeholder</a></li>
+                    <li><a href="/ProjectNames?categoryName=Test">Project Names: Test Category</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right collapse navbar-collapse" id="myNavbarCollapseRight">
+                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> (Sign Up) placeholder</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> (Login) placeholder</a></li>
+                </ul>
+
+        </div>
+    </nav>
+
     @RenderSection("BodyHeadScripts", required: false)
 
     @RenderBody()

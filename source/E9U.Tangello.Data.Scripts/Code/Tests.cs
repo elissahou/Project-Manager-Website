@@ -22,9 +22,17 @@ namespace E9U.Tangello.Data.Scripts
             // Tests.ResetDatabaseTables(mainDbContext);
             //await Tests.ResetDatabaseTablesAsync(mainDbContext);
             //await Tests.ResetDatabaseTablesAsyncParallel(mainDbContext); // This crashes, DbContext is *NOT* thread-safe.
-            await Tests.ResetDatabaseTablesAsyncParallel(mainDbContextOptions);
+
+
             //Tests.AddEntityToDatabaseTables01(mainDbContext);
-            Tests.AddEntityToDatabaseTables02(mainDbContext);
+            //Tests.AddEntityToDatabaseTables02(mainDbContext);
+
+            //Tests.AddProjectNamesToTestCategory(mainDbContext);
+
+            //await Tests.ResetDatabaseTablesAsyncParallel(mainDbContextOptions);
+
+            Tests.AddInUseProjectTest(mainDbContext);
+
         }
 
         static void AddCategoryTest(MainDbContext mainDbContext)
@@ -120,6 +128,76 @@ namespace E9U.Tangello.Data.Scripts
             mainDbContext.CategoryToProjectTypeMappings.Add(categoryToProjectTypeMapping_StarbucksDrinksToExperiments);
             mainDbContext.ProjectNameToCategoryMappings.Add(projectNameToCategoryMapping_FlatWhiteToStarbucksDrinks);
 
+            mainDbContext.SaveChanges();
+        }
+
+        static void AddProjectNamesToTestCategory(MainDbContext mainDbContext)
+        {
+            var categoryTest = new Category
+            {
+                Name = "Test"
+            };
+
+            var projectNameTest1 = new ProjectName
+            {
+                Name = "B-Test1"
+            };
+
+            var projectNameTest2 = new ProjectName
+            {
+                Name = "C-Test2"
+            };
+
+            var projectNameTest3 = new ProjectName
+            {
+                Name = "A-Test3"
+            };
+
+            var projectNameToCategoryMapping_Test1 = new ProjectNameToCategoryMapping
+            {
+                ProjectName = projectNameTest1,
+                Category = categoryTest,
+                StartDate = DateTime.Now,
+                EndDate = DateTime.MaxValue,
+            };
+
+            var projectNameToCategoryMapping_Test2 = new ProjectNameToCategoryMapping
+            {
+                ProjectName = projectNameTest2,
+                Category = categoryTest,
+                StartDate = DateTime.Now,
+                EndDate = DateTime.MaxValue,
+            };
+
+            var projectNameToCategoryMapping_Test3 = new ProjectNameToCategoryMapping
+            {
+                ProjectName = projectNameTest3,
+                Category = categoryTest,
+                StartDate = DateTime.Now,
+                EndDate = DateTime.MaxValue,
+            };
+
+            mainDbContext.ProjectNameToCategoryMappings.Add(projectNameToCategoryMapping_Test1);
+            mainDbContext.ProjectNameToCategoryMappings.Add(projectNameToCategoryMapping_Test2);
+            mainDbContext.ProjectNameToCategoryMappings.Add(projectNameToCategoryMapping_Test3);
+
+            mainDbContext.SaveChanges();
+        }
+
+        static void AddInUseProjectTest(MainDbContext mainDbContext)
+        {
+            var projectNameLime = mainDbContext.ProjectNames
+                .Where(x => x.Name == "Lime")
+                .First()
+                ;
+
+            var inUseProjectNameLime = new InUseProjectName
+            {
+                ProjectName = projectNameLime,
+                ProjectDescription = "Test description",
+            };
+
+            mainDbContext.InUseProjectNames.Add(inUseProjectNameLime);
             mainDbContext.SaveChanges();
         }
 

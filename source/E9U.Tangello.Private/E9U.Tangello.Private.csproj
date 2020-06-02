@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <Folder Include="source\ts\Classes\" />
-    <Folder Include="source\ts\Pages\" />
   </ItemGroup>
 
   <ItemGroup>

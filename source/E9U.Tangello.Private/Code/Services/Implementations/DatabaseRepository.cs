@@ -41,12 +41,12 @@ namespace E9U.Tangello.Private
 
             var projectNames = await
                 (from x in this.MainDbContext.Categories
-                    join y in this.MainDbContext.ProjectNameToCategoryMappings
-                        on x.ID equals y.CategoryID
-                    join z in this.MainDbContext.ProjectNames
-                        on y.ProjectNameID equals z.ID
-                    where x.Name == category
-                    select z.Name)
+                 join y in this.MainDbContext.ProjectNameToCategoryMappings
+                     on x.ID equals y.CategoryID
+                 join z in this.MainDbContext.ProjectNames
+                     on y.ProjectNameID equals z.ID
+                 where x.Name == category
+                 select z.Name)
                 .ToListAsync();
 
             return projectNames;
@@ -77,46 +77,73 @@ namespace E9U.Tangello.Private
             //return projectNames;
         }
 
-        public async Task PostProjectNamesForCategoryAsync(string category, string projectName)
+        public async Task<IEnumerable<string>> GetInUseProjectNamesForCategoryAsync(string category)
         {
-                var categoryEntity = await this.MainDbContext.Categories
-                    .Where(x => x.Name == category)
-                    .SingleAsync()
-                    ;
+            var allProjectNames = this.GetAllProjectNamesForCategoryAsync(category);
+            var inUseProjectNames = await
+                (from x in this.MainDbContext.InUseProjectNames
+                 join y in this.MainDbContext.ProjectNames
+                    on x.ProjectNameID equals y.ID
+                 select y.Name)
+                 .ToListAsync();
 
-                var projectNameEntity = new ProjectName
-                {
-                    Name = projectName
-                };
-
-                var projectNameToCategoryMapping = new ProjectNameToCategoryMapping
-                {
-                    ProjectName = projectNameEntity,
-                    Category = categoryEntity,
-                    StartDate = DateTime.Now,
-                    EndDate = DateTime.MaxValue,
-                };
-
-                this.MainDbContext.ProjectNameToCategoryMappings.Add(projectNameToCategoryMapping);
-                await this.MainDbContext.SaveChangesAsync();
+            return inUseProjectNames;
         }
 
-        public Task<IEnumerable<string>> GetAvailableProjectNamesForCategoryAsync(string category)
+        public async Task<IEnumerable<string>> GetAvailableProjectNamesForCategoryAsync(string category)
         {
-            //var inUseProjectNames = await
-            //    (from x in this.MainDbContext.Categories
-            //     join y in this.MainDbContext.ProjectNameToCategoryMappings
-            //         on x.ID equals y.CategoryID
-            //     join z in this.MainDbContext.ProjectNames
-            //         on y.ProjectNameID equals z.ID
-            //     where x.Name == category
-            //     select z.Name)
-            //    .ToListAsync();
+            var allProjectNames = await this.GetAllProjectNamesForCategoryAsync(category);
+            allProjectNames = allProjectNames.ToList();
 
-            //var allProjectNames = this.GetAllProjectNamesForCategoryAsync(category);
+            var inUseProjectNames = await this.GetInUseProjectNamesForCategoryAsync(category);
+            inUseProjectNames = inUseProjectNames.ToList();
 
+            var availableProjectNames = allProjectNames.Except(inUseProjectNames);
+            return availableProjectNames;
+        }
 
-            throw new NotImplementedException();
+        public async Task PostProjectNamesForCategoryAsync(string category, string projectName)
+        {
+            var categoryEntity = await this.MainDbContext.Categories
+                .Where(x => x.Name == category)
+                .SingleAsync()
+                ;
+
+            var projectNameEntity = new ProjectName
+            {
+                Name = projectName
+            };
+
+            var projectNameToCategoryMapping = new ProjectNameToCategoryMapping
+            {
+                ProjectName = projectNameEntity,
+                Category = categoryEntity,
+                StartDate = DateTime.Now,
+                EndDate = DateTime.MaxValue,
+            };
+
+            this.MainDbContext.ProjectNameToCategoryMappings.Add(projectNameToCategoryMapping);
+            await this.MainDbContext.SaveChangesAsync();
+        }
+
+        /// <summary>
+        /// Random choose a new project from ProjectNames, and creates for it an InUseProjectName.
+        /// </summary>
+        public async Task MarkProjectNameAsInUseAsync(string projectNameString)
+        {
+            var projectNameEntity = this.MainDbContext.ProjectNames
+                .Where(x => x.Name == projectNameString)
+                .Single()
+                ;
+
+            var inUseProjectName = new InUseProjectName
+            {
+                ProjectName = projectNameEntity,
+            };
+
+            this.MainDbContext.InUseProjectNames.Add(inUseProjectName);
+
+            await this.MainDbContext.SaveChangesAsync();
         }
     }
 }
