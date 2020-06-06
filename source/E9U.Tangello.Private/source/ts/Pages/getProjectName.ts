@@ -1,6 +1,10 @@
-const getProjectNameButton: HTMLButtonElement = document.querySelector("#GetProjectNameButton") as HTMLButtonElement
+import { Utilities } from "../Classes/Utilities";
+
+const getProjectNameButton: HTMLButtonElement = document.querySelector("#GetRandomProjectNameButton") as HTMLButtonElement;
+const getSpecificProjectNameButton: HTMLButtonElement = document.querySelector("#GetSpecificProjectNameButton") as HTMLButtonElement;
 const availableProjectNames: HTMLUListElement = document.querySelector("#projectNamesUL") as HTMLUListElement;
 const inUseProjectNames: HTMLUListElement = document.querySelector("#projectNamesULinUse") as HTMLUListElement;
+
 
 interface ProjectNameAsMoreComplicatedObject {
     projectName: string
@@ -8,39 +12,80 @@ interface ProjectNameAsMoreComplicatedObject {
 
 class Program {
     static Main() {
-        getProjectNameButton.addEventListener("click", Program.GetProjectNameButtonHandler);
+        getProjectNameButton.addEventListener("click", function(){ Program.GetProjectNameButtonHandler("first") });
+        getSpecificProjectNameButton.addEventListener("click", function(){ Program.GetProjectNameButtonHandler("specific") });
     }
 
-    static GetProjectNameButtonHandler() {
+    static GetProjectNameButtonHandler(getProjectNameOption: string) {
+        var inUseProjectNameElements = inUseProjectNames.getElementsByTagName('li');
         var availableProjectNameElements = availableProjectNames.getElementsByTagName('li');
         if (availableProjectNameElements.length == 0){
             alert("No more available project names :(");
             return;
         }
 
-        let url = window.location.href + "&handler=GetProjectName2";
-        let requestVerificationToken = Program.GetRequestVerificationToken();
+        let projectNameChosen = $("#inputGetProjectName").val() as string;
+
+        let formData = new FormData();
+        formData.append("getProjectNameOption", getProjectNameOption);
+        formData.append("projectNameChosen", projectNameChosen);
+
+        let url = window.location.href + "&handler=GetAvailableProjectName";
+        let requestVerificationToken = Utilities.GetRequestVerificationToken();
 
         let projectName = fetch(url, {
             method: "POST",
             headers: {
                 "RequestVerificationToken": requestVerificationToken,
-            }
+            },
+            body: formData
         }).then(response => response.json())
         .then(json => 
             {
+                
                 let temp = json as ProjectNameAsMoreComplicatedObject;
 
                 console.log(temp.projectName);
 
+                window.location.href = "/InUseProject?projectName=" + temp.projectName;
+                
+                /*
                 alert(`New project name is: ${temp.projectName}`);
+
+                
+
+                var projectName = document.createTextNode(temp.projectName);
+
+                var a = document.createElement("a");
+                a.setAttribute("href", "/InUseProject?projectName=" + temp.projectName);
+                a.appendChild(projectName);
+
 
                 var li = document.createElement("li");
                 li.setAttribute("class", "list-group-item");
-                li.appendChild(document.createTextNode(temp.projectName));
+                li.appendChild(a);
 
-                inUseProjectNames.appendChild(li);
-                Program.sortList(inUseProjectNames);
+                if (inUseProjectNameElements.length == 0) {
+                    inUseProjectNames.appendChild(li);
+                }
+                
+                for (var i = 0; i < inUseProjectNameElements.length; i++) {
+                    var inUseProjectName = inUseProjectNameElements[i].getElementsByTagName("a")[0];
+                    var inUseProjectNameText = inUseProjectName.textContent.toUpperCase();
+                    var newProjectNameText = temp.projectName.toUpperCase();
+
+                    if (i == inUseProjectNameElements.length - 1) {
+                        if (newProjectNameText > inUseProjectNameText) {
+                            inUseProjectNames.appendChild(li);
+                            break;
+                        }
+                    }
+
+                    if (inUseProjectNameText > newProjectNameText) {
+                        inUseProjectNames.insertBefore(li, inUseProjectNameElements[i]);
+                        break;
+                    }
+                }
                 
                 for (var i = 0; i < availableProjectNameElements.length; i++) {
                     var availableProjectName = availableProjectNameElements[i];
@@ -49,32 +94,8 @@ class Program {
                         break;
                     }
                 }
+                */
             });
-    }
-
-    static GetRequestVerificationToken(): string {
-        let requestVerificationTokenElement: HTMLInputElement = document.querySelector('input[name="__RequestVerificationToken"]');
-
-        let requestVerificationToken = requestVerificationTokenElement.value;
-        return requestVerificationToken;
-    }
-
-    static sortList(ul: HTMLUListElement) {
-        var new_ul = ul.cloneNode(false);
-
-        // Add all lis to an array
-        var liArray = [];
-        for (var i = ul.childNodes.length; i--;) {
-            if (ul.childNodes[i].nodeName === 'LI')
-                liArray.push(ul.childNodes[i]);
-        }
-    
-        liArray.sort();
-    
-        // Add them into the ul in order
-        for(var i = 0; i < liArray.length; i++)
-            new_ul.appendChild(liArray[i]);
-        ul.parentNode.replaceChild(new_ul, ul);
     }
 }
 

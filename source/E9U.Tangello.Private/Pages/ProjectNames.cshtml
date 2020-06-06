@@ -2,17 +2,14 @@
 @model E9U.Tangello.Private.Pages.ProjectNamesModel
 @{
     Layout = "_BootstrapLayout";
-}
-
-@section HeadElement{
-    <link rel="stylesheet" href="~/css/Pages/ProjectNames.css">
+    ViewData["Title"] = this.Model.CategoryName + " Projects";
 }
 
 
 <div class="container">
     <h2 style="text-align:center">
         @(this.Model.CategoryName)
-        <small class="text-muted">Project Names</small>
+        <small id="projectTypeInHeader" class="text-muted">@(this.Model.ProjectType)</small>
     </h2>
     <br />
 
@@ -44,7 +41,9 @@
                     <ul class="list-group" id="projectNamesULinUse">
                         @foreach (var projectName in this.Model.InUseProjectNames)
                         {
-                            <li class="list-group-item">@projectName</li>
+                        <li class="list-group-item">
+                            <a href="/InUseProject?projectName=@projectName">@projectName</a>
+                        </li>
                         }
                     </ul>
                 </div>
@@ -52,32 +51,76 @@
         </div>
 
         <div class="col-sm-4 col-md-4 col-lg-6">
-            <div class="panel panel-default light-grey-border" style="background:#f5f5f5; font-family:'Segoe UI'">
+            <div class="panel panel-default light-grey-border grey-actions-panel">
                 <div class="panel-heading" style="text-align:center; border:0"><b>Actions</b></div>
 
                 <div class="panel-body myPanel">
-                    <div>Get a project name:</div>
+                    @*<div style="height:100%; position:relative">*@
+                    <div style="height:100%; display:flex;flex-direction:column">
 
-                    @*<form method="post" asp-page-handler="GetProjectName" asp-route-categoryName="@this.Model.CategoryName">*@
-                        @Html.AntiForgeryToken()
-                        <button id="GetProjectNameButton" class="btn btn-default">Get a Random Project Name</button>
-                    @*</form>*@
+                        <div style="text-align:center">
+                            Click on an ongoing project to view its details.
+                        </div>
+                        <hr />
 
-                    <br/>
-                    <br/>
-
-                    <div>Add a project name:</div>
-                        <form method="post">
-                        @Html.AntiForgeryToken()
+                        <div>
+                            <span>Get a project name:</span>
+                            <span id="GetProjectNameMessage" class="text-muted">Enter an available project name.</span>
+                        </div>
                         <div class="input-group">
-                            <input id="inputProjectName" name="newProjectName" type="text" class="form-control" placeholder="Enter new project name here.">
+                            <input id="inputGetProjectName" name="inputGetProjectName" type="text" class="form-control" placeholder="Available project name:">
                             <div class="input-group-btn">
-                                <button class="btn btn-default" type="submit">
-                                    <text>Add Project Name</text>
-                                </button>
+                                <input disabled type="button" class="btn btn-default" id="GetSpecificProjectNameButton" value="Get Project Name">
                             </div>
                         </div>
-                    </form>
+
+                        <div style="margin-top:3px" class="input-group">
+                            <input disabled type="text" class="form-control" placeholder="or get the first available project name.">
+                            <div class="input-group-btn">
+                                <input type="button" class="btn btn-default" id="GetRandomProjectNameButton" value="Get First">
+                            </div>
+                        </div>
+
+                        <hr />
+
+                        <div>
+                            Add a project name:
+                            <span id="AddProjectNameMessage" class="text-muted">Enter a new project name.</span>
+                        </div>
+                        <form method="post">
+                            @Html.AntiForgeryToken()
+                            <div class="input-group">
+                                <input id="inputProjectName" name="newProjectName" type="text" class="form-control" placeholder="New project name:">
+                                <div class="input-group-btn">
+                                    <button disabled id="addProjectNameButton" class="btn btn-default" type="submit">
+                                        <text>Add Project Name</text>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <hr />
+
+                        <div>Rename Project Type:</div>
+                        <div class="input-group">
+                            <input id="inputProjectType" name="newProjectType" type="text" class="form-control" placeholder="Rename @this.Model.ProjectType">
+                            <div class="input-group-btn">
+                                <input disabled type="button" class="btn btn-default" id="RenameProjectTypeButton" value="Rename Project Type">
+                            </div>
+                        </div>
+
+                        <hr />
+
+                        <div style="text-align:center; margin-top:auto; margin-bottom:10px">
+                            <input type="button" class="btn btn-danger" id="DeleteCategoryButton" value="Delete @(this.Model.CategoryName)">
+                        </div>
+
+                        @*<div style="display:flex; position:absolute; bottom:0; left: 50%">
+            <div style="position: relative; left: -50%">
+                <input type="button" class="btn btn-danger" id="DeleteCategoryButton" value="Delete @(this.Model.CategoryName)">
+            </div>
+        </div>*@
+                    </div>
                 </div>
             </div>
         </div>
@@ -87,4 +130,8 @@
 @section BodyEndScripts {
     <script src="~/ts-out/search.js"></script>
     <script src="~/ts-out/getProjectName.js"></script>
+    <script src="~/ts-out/deleteCategory.js"></script>
+    <script src="~/ts-out/renameProjectType.js"></script>
+    <script src="~/js/addProjectName.js"></script>
+    <script src="~/js/toggleButtonsProjectNames.js"></script>
 }

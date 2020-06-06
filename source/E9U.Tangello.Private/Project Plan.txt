@@ -4,10 +4,34 @@ Features:
 - Asking for a new project name. (Get any, vs Choose your own?)
 - Creating lists of project names, sorted by category.
 - Associating name categories with project types.
-- For used projects, add a description.
+- (DONE) For used projects, add a description.
 
 - Adding a new project name.
 - Viewing project names.
 - Managing project names (CRUD on names, CRUD on categories, CRUD on project types).
+	- removing a category: removes the category and the mapping and all the project names under the mapping
 - Check if a project name has been used.
 - Search option (on names and descriptions)
+
+Needs to be implemented (!):
+- Forbid adding a duplicate project name. (should be unique across all categories)
+- Forbid adding a duplicate category name.
+	- on the Forbids: redirect to a page if forbidden action taken.
+- Page: view all projects (some simple way to show project name and description, with link to project name?)
+- Page: get a project name (shows all categories ???)
+- Initialize mapping start/end times. (End date should always be MAX_DATE)
+
+Should be implemented:
+- Enter a description when getting a project name.
+- When you're on a project names page for a category, it should tell you what project type it's tied to (and give an option to change project type)
+- some sort of sort by project type??? view by project type???
+- not allow someone to access a link ??????? for example, if a project name belongs to an UNASSIGNED category, you shouldn't be able to access the link
+- CRUD on project type: maybe on a page that allows you to view all projects, sorted by type
+
+Problems
+- Query string doesn't recognize "#"
+-- ex: /ProjectNames?categoryName=#z >> categoryName from query will return null.
+
+Next up:
+- project type crud
+-- renaming project type: check if it already exists

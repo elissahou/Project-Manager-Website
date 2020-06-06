@@ -4,10 +4,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace E9U.Tangello.Data.Entities
 {
-    public class InUseProjectName
+    public class InUseProjectName : MappingBase
     {
-        public int ID { get; set; }
-
         [Required]
         public int ProjectNameID { get; set; }
         public ProjectName ProjectName { get; set; }

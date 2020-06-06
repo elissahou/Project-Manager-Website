@@ -1,5 +1,5 @@
-﻿body {
-    padding-top: 60px;
+﻿.hr {
+    border-color: lightgrey;
 }
 
 .form-control:focus {
@@ -17,4 +17,57 @@
 
 .navbar {
     font-family: 'Helvetica';
+}
+
+.btn:focus, .btn:active {
+    outline: none;
+    box-shadow: none;
+}
+
+.myPanel {
+    max-height: 60vh;
+    height: 60vh;
+    overflow: auto;
+}
+
+#myInput, #myInputCategories {
+    background-image: url('https://www.w3schools.com/css/searchicon.png'); /* Add a search icon to input */
+    background-position: 10px 12px; /* Position the search icon */
+    background-repeat: no-repeat; /* Do not repeat the icon image */
+    width: 100%; /* Full-width */
+    font-size: 16px; /* Increase font-size */
+    padding: 12px 20px 12px 40px; /* Add some padding */
+    margin-bottom: 12px; /* Add some space below the input */
+    outline: none;
+}
+
+.light-grey-border {
+    border: 1px solid #c8c8c8;
+}
+
+.grey-actions-panel {
+    background: #f5f5f5;
+    font-family: 'Segoe UI';
+}
+
+.fixedHeightSelection {
+    height: 66vh
+}
+
+.myListGroupItem {
+    background: #f3f3f3;
+    color: dimgrey;
+}
+
+.myListGroupItem a {
+    color: dimgrey;
+}
+
+    .myListGroupItem a:hover {
+        color:black;
+        text-decoration:none;
+    }
+
+.list-group-item {
+    overflow: auto !important;
 }

@@ -18,7 +18,7 @@
     "E9U.Tangello.Private": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "ProjectNames?categoryName=Test",
+      "launchUrl": "Categories",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

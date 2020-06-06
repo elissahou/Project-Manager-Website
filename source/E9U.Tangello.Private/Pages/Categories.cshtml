@@ -1,0 +1,107 @@
+﻿@page
+@model E9U.Tangello.Private.Pages.CategoriesModel
+@{
+    Layout = "_BootstrapLayout";
+    ViewData["Title"] = "All Categories";
+}
+
+
+<div class="container">
+
+    <h2 style="text-align:center">
+        Categories
+        <small class="text-muted">View and manage categories.</small>
+    </h2>
+
+    <br />
+
+    <div class="row">
+        <div class="col-sm-12">
+            <input type="text" class="light-grey-border" id="myInputCategories" placeholder="Search for categories...">
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-sm-4 col-md-4 col-lg-3">
+            <div class="panel panel-default light-grey-border">
+                <div class="panel-heading" style="background:#424242;color:lightgrey">Unassigned Categories</div>
+                <div class="panel-body myPanel">
+                    <ul id="categoriesList" class="list-group">
+                        @foreach (var category in this.Model.UnassignedCategories)
+                        {
+                            <li class="list-group-item">@category</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4 col-md-4 col-lg-3">
+            <div class="panel panel-default light-grey-border">
+                <div class="panel-heading" style="background:#424242;color:lightgrey">Assigned Categories</div>
+                <div class="panel-body myPanel">
+                    <ul id="categoriesListAssigned" class="list-group" style="align-content:center">
+                        @for (var i = 0; i < this.Model.AssignedCategories.Count; i++)
+                        {
+                            var category = this.Model.AssignedCategories[i];
+                            var projectType = this.Model.ProjectTypes[i];
+                            <li class="list-group-item">
+                                <a href="/ProjectNames?categoryName=@category">@category</a>
+                                <span class="text-muted" style="font-style:italic; float:right">@projectType</span>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4 col-md-4 col-lg-6">
+
+            <div class="panel panel-default light-grey-border grey-actions-panel">
+                <div class="panel-heading" style="text-align:center; border:0"><b>Actions</b></div>
+
+                <div class="panel-body myPanel">
+                    <div style="text-align:center">
+                        Click on a category name to view and manage its project names.
+                    </div>
+                    <hr />
+
+                    <div>Add a new category:</div>
+                    <div id="AddCategoryMessage" class="text-muted">Enter the name of a new category.</div>
+                    <form method="post">
+                        @Html.AntiForgeryToken()
+                        <div class="input-group">
+                            <input id="inputCategoryName" name="newCategory" type="text" class="form-control" placeholder="ex: Shakespeare Tragedies">
+                            <div class="input-group-btn">
+                                <button disabled id="addCategoryButton" class="btn btn-default" type="submit">
+                                    <text>Add Category</text>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <hr />
+
+                    <div>Assign a category to a project type:</div>
+                    <div id="AssignCategoryMessage" class="text-muted">Enter a project type and unassigned category name.</div>
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="category" id="category" placeholder="Category">
+                        <input style="margin-top:-1px" type="text" class="form-control" name="inputProjectType" id="inputProjectType" placeholder="Project Type">
+                        <div class="input-group-btn">
+                            <input disabled type="button" class="btn btn-default" id="AssignButton" style="height:67px" value="Assign">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section BodyEndScripts {
+    <script src="~/ts-out/categories.js"></script>
+    <script src="~/ts-out/categoriesAssign.js"></script>
+    <script src="~/js/toggleButtonsCategories.js"></script>
+}
